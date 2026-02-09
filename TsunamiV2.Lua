@@ -11,85 +11,85 @@ local PartsData = {
 		[1] = "Wedge",
 		[2] = Vector3.new(30.5, -19.25, 0),
 		[3] = Vector3.new(90, 0, -90),
-		[4] = Vector3.new(368, 16, 7)
+		[4] = Vector3.new(500, 16, 7)
 	},
 	[2] = {
 		[1] = "Wedge",
 		[2] = Vector3.new(17.5, -12.25, 0),
 		[3] = Vector3.new(90, 0, -90),
-		[4] = Vector3.new(368, 10, 7)
+		[4] = Vector3.new(500, 10, 7)
 	},
 	[3] = {
 		[1] = "Wedge",
 		[2] = Vector3.new(6.5, -0.25, 0),
 		[3] = Vector3.new(90, 0, -90),
-		[4] = Vector3.new(368, 12, 17)
+		[4] = Vector3.new(500, 12, 17)
 	},
 	[4] = {
 		[1] = "Wedge",
 		[2] = Vector3.new(-4.5, 12.25, 0),
 		[3] = Vector3.new(90, 0, -90),
-		[4] = Vector3.new(368, 10, 8)
+		[4] = Vector3.new(500, 10, 8)
 	},
 	[5] = {
 		[1] = "Part",
 		[2] = Vector3.new(-5, -12.25, 0),
 		[3] = Vector3.new(0, 0, 0),
-		[4] = Vector3.new(35, 7, 368)
+		[4] = Vector3.new(35, 7, 500)
 	},
 	[6] = {
 		[1] = "Part",
 		[2] = Vector3.new(-2, -19.25, 0),
 		[3] = Vector3.new(0, 0, 0),
-		[4] = Vector3.new(49, 7, 368)
+		[4] = Vector3.new(49, 7, 500)
 	},
 	[7] = {
 		[1] = "Part",
 		[2] = Vector3.new(-11, -0.25, 0),
 		[3] = Vector3.new(0, 0, 0),
-		[4] = Vector3.new(23, 17, 368)
+		[4] = Vector3.new(23, 17, 500)
 	},
 	[8] = {
 		[1] = "Wedge",
 		[2] = Vector3.new(-17.5, 19.25, 0),
 		[3] = Vector3.new(90, 0, -90),
-		[4] = Vector3.new(368, 16, 6)
+		[4] = Vector3.new(500, 16, 6)
 	},
 	[9] = {
 		[1] = "Part",
 		[2] = Vector3.new(-16, 12.25, 0),
 		[3] = Vector3.new(0, 0, 0),
-		[4] = Vector3.new(13, 8, 368)
+		[4] = Vector3.new(13, 8, 500)
 	},
 	[10] = {
 		[1] = "Wedge",
 		[2] = Vector3.new(-24, 11.25, 0),
 		[3] = Vector3.new(180, 90, 0),
-		[4] = Vector3.new(368, 10, 3)
+		[4] = Vector3.new(500, 10, 3)
 	},
 	[11] = {
 		[1] = "Wedge",
 		[2] = Vector3.new(-24.5, -10.75, 0),
 		[3] = Vector3.new(90, 0, 90),
-		[4] = Vector3.new(368, 4, 10)
+		[4] = Vector3.new(500, 4, 10)
 	},
 	[12] = {
 		[1] = "Wedge",
 		[2] = Vector3.new(-27.5, 19.25, 0),
 		[3] = Vector3.new(-90, 0, 90),
-		[4] = Vector3.new(368, 4, 6)
+		[4] = Vector3.new(500, 4, 6)
 	},
 	[13] = {
 		[1] = "Wedge",
 		[2] = Vector3.new(-31.5, -19.25, 0),
 		[3] = Vector3.new(0, 90, 0),
-		[4] = Vector3.new(368, 7, 10)
+		[4] = Vector3.new(500, 7, 10)
 	}
 }
 
-local START_POS = Vector3.new(500, 50, 0)
-local GOAL_POS = Vector3.new(-500, 50, 0)
-local LIFE_SPAN = 10
+local START_POS = Vector3.new(400, 50, 0)
+local GOAL_POS = Vector3.new(-400, 50, 0)
+local LIFE_SPAN = 12.5
 local NETWORK_RATE = 0.02
 
 local WrappedParts = {}
@@ -123,8 +123,7 @@ connection = RunService.Heartbeat:Connect(function(dt)
 			local data = PartsData[i]
 			local relPos = data[2]
 			local relRot = data[3]
-			p.CFrame = CFrame.new(currentOffset + relPos) *
-			CFrame.Angles(math.rad(relRot.X), math.rad(relRot.Y), math.rad(relRot.Z))
+			p.CFrame = CFrame.new(currentOffset + relPos) * CFrame.Angles(math.rad(relRot.X), math.rad(relRot.Y), math.rad(relRot.Z))
 		end
 	end
 
@@ -142,8 +141,7 @@ connection = RunService.Heartbeat:Connect(function(dt)
 				local data = PartsData[i]
 				local size = data[4]
 				local relPos = currentOffset + data[2]
-				local cf = CFrame.new(relPos) *
-				CFrame.Angles(math.rad(data[3].X), math.rad(data[3].Y), math.rad(data[3].Z))
+				local cf = CFrame.new(relPos) * CFrame.Angles(math.rad(data[3].X), math.rad(data[3].Y), math.rad(data[3].Z))
 
 				local localHRP = cf:PointToObjectSpace(hrp.Position)
 				if math.abs(localHRP.X) <= size.X / 2 and math.abs(localHRP.Y) <= size.Y / 2 and math.abs(localHRP.Z) <= size.Z / 2 then
