@@ -100,6 +100,7 @@ for i, data in ipairs(PartsData) do
 		p.Color = Color3.fromRGB(60, 90, 255)
 		p.Material = Enum.Material.Glass
 		p.Transparency = 0.5
+		p.Breakable = false
 		p.CanCollide = false
 		WrappedParts[i] = p
 	end
