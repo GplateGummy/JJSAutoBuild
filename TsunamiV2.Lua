@@ -87,9 +87,9 @@ local PartsData = {
 	}
 }
 
-local START_POS = Vector3.new(400, 50, 0)
-local GOAL_POS = Vector3.new(-400, 50, 0)
-local LIFE_SPAN = 12.5
+local START_POS = Vector3.new(400, 25, 0)
+local GOAL_POS = Vector3.new(-400, 25, 0)
+local LIFE_SPAN = 8
 local NETWORK_RATE = 0.02
 
 local WrappedParts = {}
