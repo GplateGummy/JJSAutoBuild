@@ -4,8 +4,7 @@ local RunService = game:GetService("RunService")
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local DebugRemote = ReplicatedStorage:WaitForChild("Knit"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild(
-"DebugService"):WaitForChild("RE"):WaitForChild("Debug")
+local DebugRemote = ReplicatedStorage:WaitForChild("Knit"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("DebugService"):WaitForChild("RE"):WaitForChild("Debug")
 
 local PartsData = {
 	[1] = {
