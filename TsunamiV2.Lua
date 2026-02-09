@@ -8,25 +8,25 @@ local DebugRemote = ReplicatedStorage:WaitForChild("Knit"):WaitForChild("Knit"):
 
 local PartsData = {
 	[1] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(30.5, -19.25, 0),
 		[3] = Vector3.new(90, 0, -90),
 		[4] = Vector3.new(368, 16, 7)
 	},
 	[2] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(17.5, -12.25, 0),
 		[3] = Vector3.new(90, 0, -90),
 		[4] = Vector3.new(368, 10, 7)
 	},
 	[3] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(6.5, -0.25, 0),
 		[3] = Vector3.new(90, 0, -90),
 		[4] = Vector3.new(368, 12, 17)
 	},
 	[4] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(-4.5, 12.25, 0),
 		[3] = Vector3.new(90, 0, -90),
 		[4] = Vector3.new(368, 10, 8)
@@ -50,7 +50,7 @@ local PartsData = {
 		[4] = Vector3.new(23, 17, 368)
 	},
 	[8] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(-17.5, 19.25, 0),
 		[3] = Vector3.new(90, 0, -90),
 		[4] = Vector3.new(368, 16, 6)
@@ -62,35 +62,35 @@ local PartsData = {
 		[4] = Vector3.new(13, 8, 368)
 	},
 	[10] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(-24, 11.25, 0),
 		[3] = Vector3.new(180, 90, 0),
 		[4] = Vector3.new(368, 10, 3)
 	},
 	[11] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(-24.5, -10.75, 0),
 		[3] = Vector3.new(90, 0, 90),
 		[4] = Vector3.new(368, 4, 10)
 	},
 	[12] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(-27.5, 19.25, 0),
 		[3] = Vector3.new(-90, 0, 90),
 		[4] = Vector3.new(368, 4, 6)
 	},
 	[13] = {
-		[1] = "WedgePart",
+		[1] = "Wedge",
 		[2] = Vector3.new(-31.5, -19.25, 0),
 		[3] = Vector3.new(0, 90, 0),
 		[4] = Vector3.new(368, 7, 10)
 	}
 }
 
-local START_POS = Vector3.new(1000, -50, 0)
-local GOAL_POS = Vector3.new(-1000, 100, 0)
-local LIFE_SPAN = 15
-local NETWORK_RATE = 0.03
+local START_POS = Vector3.new(500, 50, 0)
+local GOAL_POS = Vector3.new(-500, 50, 0)
+local LIFE_SPAN = 10
+local NETWORK_RATE = 0.02
 
 local WrappedParts = {}
 for i, data in ipairs(PartsData) do
