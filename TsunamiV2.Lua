@@ -102,6 +102,7 @@ for i, data in ipairs(PartsData) do
 		p.Transparency = 0.5
 		p.Breakable = false
 		p.CanCollide = false
+		p.Position = Vector3.new(0, -200, 0)
 		WrappedParts[i] = p
 	end
 end
