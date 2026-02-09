@@ -21,7 +21,7 @@ local function getRandomPosition()
 	repeat
 		position = Vector3.new(
 			math.random(-500, 500), 
-			math.random(1500, 2500), 
+			math.random(-500, 500), 
 			math.random(-500, 500)
 		)
 		attempts += 1
@@ -141,7 +141,7 @@ function BuildModule.Wrap(realPart)
 	return wrapper
 end
 
-local function waitForPartAtPosition(position, timeout)
+local function waitForPartAtPosition(position, classname, timeout)
 	local foundPart = nil
 	local start = tick()
 	
@@ -154,7 +154,7 @@ local function waitForPartAtPosition(position, timeout)
 	local c1 = CoreBuildable.ChildAdded:Connect(checkPart)
 	local c2 = DestructibleBuildable.ChildAdded:Connect(checkPart)
 	
-	BuildEvent:FireServer("Create", "Part", position)
+	BuildEvent:FireServer("Create", classname, position)
 	
 	repeat task.wait() until foundPart or (tick() - start) > timeout
 	
@@ -168,7 +168,7 @@ end
 BuildModule.Instance = {
 	new = function(className)
 		local spawnPos = getRandomPosition()
-		local realPart = waitForPartAtPosition(spawnPos, 2)
+		local realPart = waitForPartAtPosition(spawnPos, className, 2)
 		if realPart then
 			return BuildModule.Wrap(realPart)
 		end
