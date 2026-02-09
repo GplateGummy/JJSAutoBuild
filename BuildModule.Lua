@@ -88,6 +88,12 @@ function BuildModule.Wrap(realPart)
 
 	setmetatable(wrapper, {
 		__index = function(_, key)
+			if key == "Destroy" or key == "Delete" then
+				return function()
+					queue()
+					table.insert(Batch.Delete, realPart)
+				end
+			end
 			return state[key] or realPart[key]
 		end,
 		__newindex = function(_, key, val)
@@ -163,20 +169,13 @@ BuildModule.Instance = {
 	new = function(className)
 		local spawnPos = getRandomPosition()
 		local realPart = waitForPartAtPosition(spawnPos, 2)
-		
 		if realPart then
 			return BuildModule.Wrap(realPart)
 		end
-		
 		warn("BuildModule: Part creation failed at", spawnPos)
 		return nil
 	end
 }
-
-function BuildModule:Delete(part)
-	queue()
-	table.insert(Batch.Delete, part)
-end
 
 setmetatable(BuildModule, { __call = function(_, part) return BuildModule.Wrap(part) end })
 
