@@ -10,7 +10,9 @@ local function fireBatch()
 
     if next(Batch.Move) then
         local moveEntries = {}
-        for part, data in pairs(Batch.Move) do table.insert(moveEntries, { part, data.cf, data.size }) end
+        for part, data in pairs(Batch.Move) do 
+            table.insert(moveEntries, { part, data.cf, data.size }) 
+        end
         BuildEvent:FireServer("Move", moveEntries)
     end
 
@@ -30,8 +32,7 @@ local function fireBatch()
 
     for propName, values in pairs(Batch.LogicProp) do
         for val, parts in pairs(values) do
-            BuildEvent:FireServer(
-                "LogicProp", parts, propName, val)
+            BuildEvent:FireServer("LogicProp", parts, propName, val)
         end
     end
 
@@ -39,11 +40,9 @@ local function fireBatch()
         BuildEvent:FireServer("Delete", Batch.Delete)
     end
 
-    for k, v in pairs(Batch) do
+    for k in pairs(Batch) do
         Batch[k] = {}
     end
-
-    Batch.LogicProp = {}
 end
 
 local function queue()
@@ -59,8 +58,7 @@ local function wrap(realPart)
 
     local state = {
         cf = (typeof(realPart) ~= "string" and realPart:IsA("BasePart")) and realPart.CFrame or CFrame.new(),
-        size = (typeof(realPart) ~= "string" and realPart:IsA("BasePart")) and
-            realPart.Size or Vector3.new(1, 1, 1)
+        size = (typeof(realPart) ~= "string" and realPart:IsA("BasePart")) and realPart.Size or Vector3.new(1, 1, 1)
     }
 
     mt.__index = realPart
@@ -70,11 +68,12 @@ local function wrap(realPart)
             if key == "CFrame" then
                 state.cf = val
             elseif key == "Position" then
-                state.cf = CFrame.new(val) *
-                    state.cf.Rotation
-            elseif key == "Orientation" or key == "Rotation" then
-                state.cf = state.cf *
-                    CFrame.Angles(math.rad(val.X), math.rad(val.Y), math.rad(val.Z))
+                local _, _, _, r00, r01, r02, r10, r11, r12, r20, r21, r22 = state.cf:GetComponents()
+                state.cf = CFrame.new(val.X, val.Y, val.Z, r00, r01, r02, r10, r11, r12, r20, r21, r22)
+            elseif key == "Orientation" then
+                state.cf = CFrame.new(state.cf.Position) * CFrame.Angles(math.rad(val.X), math.rad(val.Y), math.rad(val.Z))
+            elseif key == "Rotation" then
+                state.cf = CFrame.new(state.cf.Position) * CFrame.Angles(val.X, val.Y, val.Z)
             end
             Batch.Move[realPart] = { cf = state.cf, size = state.size }
         elseif key == "Size" then
